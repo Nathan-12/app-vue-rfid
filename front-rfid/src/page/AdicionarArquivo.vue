@@ -23,17 +23,23 @@
                   </td>
                   <td>
                     <input type="text" placeholder="Código do cartão" v-model="codigo" />
+                    <label for="codigo">*asasdakjh</label>
                   </td>
                 </tr>
               </tbody>
             </table>
+            <!-- 
             <button class="waves-effect green waves-light btn-small">
               Salvar
               <i class="material-icons left">save</i>
+            </button> -->
+            <button type="reset" class="waves-effect green waves-light btn-small">
+              Cadastrar novo cartão
+              <i class="material-icons left">add</i>
             </button>
-            <button type="reset" class="waves-effect red waves-light btn-small">
-              Limpar
-              <i class="material-icons left">delete</i>
+            <button type="reset" class="waves-effect blue waves-light btn-small"  @click="irLista()">
+              Finalizar Cadastro
+              <i class="material-icons left">save</i>
             </button>
           </form>
         </div>
@@ -70,7 +76,6 @@ export default {
         })
         .then(() => {
           alert("Arquivo cadastrado com sucesso na atividade");
-          this.codigo = ""
         })
         .catch(e => {
           alert("erro: " + e);
@@ -83,6 +88,9 @@ export default {
     limparCampos(){
         this.codigo = "",
         this.file = null
+    },
+    irLista(){
+      this.$router.push("/listar-atividades");
     }
   }
 };

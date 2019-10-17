@@ -10,7 +10,7 @@
             
             <h5>Tipo da Atividade</h5>
             <div class="row">
-              <div class="col s4">
+              <div class="col s6">
                 <p>
                   <label>
                     <input
@@ -24,7 +24,7 @@
                   </label>
                 </p>
               </div>
-              <div class="col s4">
+              <div class="col s6">
                 <p>
                   <label>
                     <input
@@ -38,20 +38,7 @@
                   </label>
                 </p>
               </div>
-              <div class="col s4">
-                <p>
-                  <label>
-                    <input
-                      class="with-gap"
-                      name="group1"
-                      type="radio"
-                      value="ATIVIDADE3"
-                      v-model="tipoAtividade"
-                    />
-                    <span>Atividade 3</span>
-                  </label>
-                </p>
-              </div>
+              
             </div>
             <h5>Mídia a ser usada</h5>
             <div class="row">
@@ -123,7 +110,7 @@ export default {
           midia: this.midia
         })
         .then(() => {
-          this.$router.push("/cadastro-ok");
+          this.$router.push("/listar-atividades");
         })
         .catch(e => {
           alert("erro: " + e);
