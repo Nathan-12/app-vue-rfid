@@ -20,13 +20,23 @@
                 <tr>
                   <td>
                     <label>
-                      Vídeo e Imagem
+                      Vídeo
                       <input
-                        id="files"
-                        ref="files"
+                        id="filesVideo"
+                        ref="filesVideo"
                         type="file"
-                        multiple
-                        v-on:change="selecionarArquivos()"
+                        v-on:change="selecionarArquivosVideo()"
+                      />
+                      <br />
+                      <br />
+                    </label>
+                    <label>
+                      Imagem
+                      <input
+                        id="filesImg"
+                        ref="filesImg"
+                        type="file"
+                        v-on:change="selecionarArquivosImg()"
                       />
                       <br />
                       <br />
@@ -88,7 +98,8 @@ export default {
   name: "app",
   data() {
     return {
-      files: "",
+      video: null,
+      img: null,
       atividadeId: "",
       opcao: ""
     };
@@ -99,13 +110,8 @@ export default {
   methods: {
     salvarFile() {
       const formData = new FormData();
-
-      for (var i = 0; i < this.files.length; i++) {
-        const file = this.files[i];
-
-        formData.append("files[" + i + "]", file);
-        
-      }
+      formData.append("fileVideo", this.filesVideo);
+      formData.append("fileImg", this.filesImg);
       formData.append("opcao", this.opcao);
       this.$http
         .post("http://localhost:8090/api/v-f/" + this.atividadeId, formData, {
@@ -121,8 +127,11 @@ export default {
         });
     },
 
-    selecionarArquivos() {
-      this.files = this.$refs.files.files;
+    selecionarArquivosVideo() {
+      this.file = this.$refs.filesVideo.filesVideo;
+    },
+    selecionarArquivosImg() {
+      this.file = this.$refs.filesImg.filesImg;
     },
     limparCampos() {
       (this.codigo = ""), (this.file = null);
