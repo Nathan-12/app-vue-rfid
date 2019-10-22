@@ -12,19 +12,57 @@
             <table>
               <thead>
                 <tr>
-                  <th>Escolha o arquivo</th>
-                  <th>Insira o código rfid</th>
+                  <th>Escolha os arquivos</th>
+                  <th>Possuem relação ?</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td>
-                    <input id="files" ref="files" type="file" v-on:change="selecionarArquivos()" /><br><br>
-                    <input id="files" ref="files" type="file" v-on:change="selecionarArquivos()" />
+                    <label>
+                      Vídeo e Imagem
+                      <input
+                        id="files"
+                        ref="files"
+                        type="file"
+                        multiple
+                        v-on:change="selecionarArquivos()"
+                      />
+                      <br />
+                      <br />
+                    </label>
                   </td>
                   <td>
-                    <input type="text" placeholder="Código do cartão" v-model="codigo" /><br><br>
-                    <input type="text" placeholder="Código do cartão" v-model="codigo" />
+                    <div class="row">
+                      <div class="col s6">
+                        <p>
+                          <label>
+                            <input
+                              class="with-gap"
+                              name="group1"
+                              type="radio"
+                              value="TRUE"
+                              v-model="opcao"
+                            />
+                            <span>Sim</span>
+                          </label>
+                        </p>
+                      </div>
+                      <div class="col s6">
+                        <p>
+                          <label>
+                            <input
+                              class="with-gap"
+                              name="group1"
+                              type="radio"
+                              value="FALSE"
+                              v-model="opcao"
+                            />
+                            <span>Não</span>
+                          </label>
+                        </p>
+                      </div>
+                    </div>
                   </td>
                 </tr>
               </tbody>
@@ -50,10 +88,9 @@ export default {
   name: "app",
   data() {
     return {
-      
-      file: null,
-      codigo: "",
-      atividadeId: ""
+      files: "",
+      atividadeId: "",
+      opcao: ""
     };
   },
   created: function() {
@@ -62,17 +99,22 @@ export default {
   methods: {
     salvarFile() {
       const formData = new FormData();
-      formData.append("file", this.file);
-      formData.append("codigo", this.codigo);
+
+      for (var i = 0; i < this.files.length; i++) {
+        const file = this.files[i];
+
+        formData.append("files[" + i + "]", file);
+        
+      }
+      formData.append("opcao", this.opcao);
       this.$http
-        .post("http://localhost:8090/api/" + this.atividadeId, formData, {
+        .post("http://localhost:8090/api/v-f/" + this.atividadeId, formData, {
           headers: {
             "Content-Type": "multipart/form-data"
           }
         })
         .then(() => {
           alert("Arquivo cadastrado com sucesso na atividade");
-          this.codigo = ""
         })
         .catch(e => {
           alert("erro: " + e);
@@ -80,11 +122,10 @@ export default {
     },
 
     selecionarArquivos() {
-      this.file = this.$refs.files.files[0];
+      this.files = this.$refs.files.files;
     },
-    limparCampos(){
-        this.codigo = "",
-        this.file = null
+    limparCampos() {
+      (this.codigo = ""), (this.file = null);
     }
   }
 };

@@ -40,37 +40,6 @@
               </div>
               
             </div>
-            <h5>Mídia a ser usada</h5>
-            <div class="row">
-              <div class="col s6">
-                <p>
-                  <label>
-                    <input
-                      class="with-gap"
-                      name="group2"
-                      type="radio"
-                      value="IMAGEM"
-                      v-model="midia"
-                    />
-                    <span>Imagem</span>
-                  </label>
-                </p>
-              </div>
-              <div class="col s6">
-                <p>
-                  <label>
-                    <input
-                      class="with-gap"
-                      name="group2"
-                      type="radio"
-                      value="VIDEO"
-                      v-model="midia"
-                    />
-                    <span>Vídeo</span>
-                  </label>
-                </p>
-              </div>
-            </div>
 
             <button class="waves-effect green waves-light btn-small">
               Salvar
@@ -95,7 +64,6 @@ export default {
     return {
       nome: "",
       tipoAtividade: "",
-      midia: ""
     };
   },
   mounted() {
@@ -107,7 +75,6 @@ export default {
         .post("http://localhost:8090/api/adicionar", {
           nome: this.nome,
           tipoAtividade: this.tipoAtividade,
-          midia: this.midia
         })
         .then(() => {
           this.$router.push("/listar-atividades");
