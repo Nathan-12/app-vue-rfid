@@ -8,10 +8,10 @@
       <div class="row"></div>
       <div class="col s2"></div>
       <div class="col s8">
-      <video loop id="tagVideo" width="400px" height="400px">
-                  <source src />
-      </video>
-      <!--<img id="tagImagem" src />-->
+      <!--<video loop id="tagVideo" width="400px" height="400px">
+                  <source src="/assets/arquivos/" type="mp4" />
+      </video>-->
+      <img id="tagImagem" src />
       </div>
       <div class="col s2"></div>
       
@@ -27,7 +27,6 @@ export default {
       arquivos: [],
       indice: 0,
       srcSet: "",
-      srcSetVideo: "",
       inputCodigo: "",
       erros: 0
     };
@@ -43,16 +42,14 @@ export default {
       this.$http
         .get("http://localhost:8090/arquivo/exibir/" + this.atividadeId)
         .then(res => {
-          //const img = document.querySelector("#tagImagem");
-          const video = document.querySelector("#tagVideo");
+          const img = document.querySelector("#tagImagem");
           this.arquivos = res.data;
           this.srcSet = "00" + res.data[this.indice].codigo;
-
-          video.pause();
-          video.setAttribute("src", "/static/arquivos/" + this.srcSet);
-          video.load();
-          video.play();
-
+          img.setAttribute("src", "/static/arquivos/" + this.srcSet);
+          //video.pause();
+          //video.setAttribute("src", "arquivos/" + inputCodigo.value);
+          //video.load();
+          //video.play();
         });
     },
     verificarCodigo(event) {
@@ -63,7 +60,7 @@ export default {
           //console.log(this.arquivos.length);
           //console.log(this.indice);
           if(this.arquivos.length == this.indice){
-            this.$router.push("/atividade-encerrada");
+            this.$router.push("/atividade-encerrada")
           }
         }
         else {
@@ -71,7 +68,7 @@ export default {
           this.erros ++;
           //console.log(this.srcSet);
           //console.log(this.inputCodigo);
-        } 
+        }
         this.inputCodigo = "";
       }
     },
@@ -90,10 +87,6 @@ button {
   margin: 1%;
 }
 img{
-  width: 300px;
-  height: 300px;
-}
-video{
   width: 300px;
   height: 300px;
 }

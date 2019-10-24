@@ -7,6 +7,7 @@ import CadastroOkPage from '../page/CadastroOk'
 import AdicionarArquivoPage from '../page/AdicionarArquivo'
 import ListaDeAtividadesPage from '../page/ListaDeAtividades'
 import AssociacaoPage from "../page/Associacao"
+import VFPage from "../page/VF"
 import FilesCadastradosPage from "../page/FilesCadastrados" 
 import AtividadeEncerradaPage from "../page/AtividadeEncerrada" 
 import ArquivosPorAtividadePage from "../page/ArquivosPorAtividade"
@@ -51,6 +52,11 @@ export default [
     path: "/associacao/:id",
     name: "Associacao",
     component: AssociacaoPage
+  },
+  {
+    path: "/vf/:id",
+    name: "VF",
+    component:VFPage
   },
   {
     path: "/arquivos/:id",

@@ -2,37 +2,46 @@
   <div id="app">
     <div class="container">
       <div class="row">
-        <div class="col s2"></div>
-        <div class="col s8">
+        <div class="col s12">
           <form @submit.prevent="salvarFile">
-            <div class="row">
-              <div class="col s6"></div>
-              <div class="col s6"></div>
-            </div>
             <table>
               <thead>
                 <tr>
                   <th>Escolha o arquivo</th>
-                  <th>Insira o código rfid</th>
+                  <th></th>
+                  <th>Aproxime o cartão do leitor RFID</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td>
-                    <input id="files" ref="files" type="file" v-on:change="selecionarArquivos()" />
+                    <div class="file-field input-field">
+                      <div class="btn">
+                        <span>vídeo</span>
+                        <input
+                          id="files" ref="files" type="file" v-on:change="selecionarArquivos()"
+                        />
+                      </div>
+                      <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text" placeholder="<== Clique para adicionar um vídeo" />
+                      </div>
+                    </div>
                   </td>
+                    <td class="row">
+                      <div class="col s1"></div>
+                    </td>
                   <td>
-                    <input type="text" placeholder="Código do cartão" v-model="codigo" />
-                    <label for="codigo">*asasdakjh</label>
+                    <div class="col s12">
+                      <div class="input-field">
+                    <input class="validate" id="cod" type="text" v-model="codigo" />
+                    <label for="cod">Clique aqui, em seguida passe o cartão</label>
+                    </div>  
+                    </div>
+                    
                   </td>
                 </tr>
               </tbody>
             </table>
-            <!-- 
-            <button class="waves-effect green waves-light btn-small">
-              Salvar
-              <i class="material-icons left">save</i>
-            </button> -->
             <button type="reset" class="waves-effect green waves-light btn-small">
               Cadastrar novo cartão
               <i class="material-icons left">add</i>
@@ -43,7 +52,6 @@
             </button>
           </form>
         </div>
-        <div class="col s2"></div>
       </div>
     </div>
   </div>

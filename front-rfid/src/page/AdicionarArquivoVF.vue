@@ -4,57 +4,71 @@
       <div class="row">
         <div class="col s2"></div>
         <div class="col s8">
-          <form @submit.prevent="salvarFile">
+          <form @submit.prevent="salvarFileVF">
             <div class="row">
               <div class="col s6"></div>
               <div class="col s6"></div>
             </div>
-            <table>
+            <table class="responsive-table">
               <thead>
                 <tr>
                   <th>Escolha os arquivos</th>
+                  <th></th>
                   <th>Possuem relação ?</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td>
-                    <label>
-                      Vídeo
-                      <input
-                        id="filesVideo"
-                        ref="filesVideo"
-                        type="file"
-                        v-on:change="selecionarArquivosVideo()"
-                      />
-                      <br />
-                      <br />
-                    </label>
-                    <label>
-                      Imagem
-                      <input
-                        id="filesImg"
-                        ref="filesImg"
-                        type="file"
-                        v-on:change="selecionarArquivosImg()"
-                      />
-                      <br />
-                      <br />
-                    </label>
+                    <h6>Escolha o vídeo</h6>
+                    <div class="file-field input-field">
+                      <div class="btn">
+                        <span>Vídeo</span>
+                        <input
+                          id="filesVideo"
+                          ref="filesVideo"
+                          type="file"
+                          v-on:change="selecionarArquivosVideo()"
+                        />
+                      </div>
+                      <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text" placeholder="<== Clique para adicionar o vídeo"/>
+                      </div>
+                    </div>
+                    <h6>Escolha a Imagem</h6>
+                    <div class="file-field input-field">
+                      <div class="btn">
+                        <span>Imagem</span>
+                        <input
+                          id="filesImg"
+                          ref="filesImg"
+                          type="file"
+                          v-on:change="selecionarArquivosImg()"
+                        />
+                      </div>
+                      <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text" placeholder="<== Clique para adicionar a imagem" />
+                      </div>
+                    </div>
+                  </td>
+                  <td class="row">
+                    <div class="col s1">
+
+                    </div>
                   </td>
                   <td>
                     <div class="row">
-                      <div class="col s6">
+                      <div class="col s5">
                         <p>
                           <label>
                             <input
                               class="with-gap"
                               name="group1"
                               type="radio"
-                              value="TRUE"
-                              v-model="opcao"
+                              value="00123"
+                              v-model="codigoTeste"
                             />
-                            <span>Sim</span>
+                            <span>SIM</span>
                           </label>
                         </p>
                       </div>
@@ -65,10 +79,10 @@
                               class="with-gap"
                               name="group1"
                               type="radio"
-                              value="FALSE"
-                              v-model="opcao"
+                              value="00321"
+                              v-model="codigoTeste"
                             />
-                            <span>Não</span>
+                            <span>NÃO</span>
                           </label>
                         </p>
                       </div>
@@ -78,12 +92,12 @@
               </tbody>
             </table>
             <button class="waves-effect green waves-light btn-small">
-              Salvar
-              <i class="material-icons left">save</i>
+              Adicionar outros arquivos
+              <i class="material-icons left">add</i>
             </button>
-            <button type="reset" class="waves-effect red waves-light btn-small">
-              Limpar
-              <i class="material-icons left">delete</i>
+            <button type="reset" class="waves-effect blue waves-light btn-small">
+              Finalizar cadastro
+              <i class="material-icons left">save</i>
             </button>
           </form>
         </div>
@@ -98,43 +112,40 @@ export default {
   name: "app",
   data() {
     return {
-      video: null,
-      img: null,
-      atividadeId: "",
-      opcao: ""
+      fileVideo: null,
+      fileImg: null,
+      codigoTeste: "",
+      atividadeId: ""
     };
   },
   created: function() {
     this.atividadeId = this.$route.params.id;
   },
   methods: {
-    salvarFile() {
+    salvarFileVF() {
       const formData = new FormData();
-      formData.append("fileVideo", this.filesVideo);
-      formData.append("fileImg", this.filesImg);
-      formData.append("opcao", this.opcao);
+      formData.append("fileVideo", this.fileVideo);
+      formData.append("fileImg", this.fileImg);
+      formData.append("codigoTeste", this.codigoTeste);
       this.$http
-        .post("http://localhost:8090/api/v-f/" + this.atividadeId, formData, {
+        .post("http://localhost:8090/api/add/" + this.atividadeId, formData, {
           headers: {
             "Content-Type": "multipart/form-data"
           }
         })
         .then(() => {
-          alert("Arquivo cadastrado com sucesso na atividade");
+          alert("Arquivo cadastrado com sucesso na atividade!");
         })
-        .catch(e => {
-          alert("erro: " + e);
+        .catch(() => {
+          alert("erro: Não foi possível cadastrar o arquivo, tente novamente!");
         });
     },
 
     selecionarArquivosVideo() {
-      this.file = this.$refs.filesVideo.filesVideo;
+      this.fileVideo = this.$refs.filesVideo.files[0];
     },
     selecionarArquivosImg() {
-      this.file = this.$refs.filesImg.filesImg;
-    },
-    limparCampos() {
-      (this.codigo = ""), (this.file = null);
+      this.fileImg = this.$refs.filesImg.files[0];
     }
   }
 };
