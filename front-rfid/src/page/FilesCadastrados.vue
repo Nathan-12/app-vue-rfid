@@ -1,27 +1,13 @@
 <template>
   <div id="app">
+    <div class="containerr">
+      <input autofocus id="codigoCartao" type="text" placeholder="insira o código do cartão" />
+    </div>
+    
     <div class="container">
-      <div class="row">
-        <div class="col s1"></div>
-        <div class="col s10">
-        <input autofocus id="codigoCartao" type="text" />  
-          <div class="container">
-            <div class="row">
-              <div class="col-sm"></div>
-
-              <div class="col-sm">
-                <!--<video loop id="tagVideo" width="400px" height="400px">
-                  <source src="/assets/arquivos/" type="mp4" />
-                </video>-->
-                <img id="tagImagem" src=""/>
-                
-              </div>
-              <div class="col-sm"></div>
-            </div>
-          </div>
-        </div>
-        <div class="col s1"></div>
-      </div>
+      <video class="videoFilesCadastrados" loop id="tagVideo" width="400px" height="400px">
+        <source src type="mp4" />
+      </video>
     </div>
   </div>
 </template>
@@ -29,17 +15,16 @@
 <script>
 document.addEventListener("DOMContentLoaded", function() {
   const inputCodigo = document.querySelector("#codigoCartao");
-  const img = document.querySelector("#tagImagem");
+  const video = document.querySelector("#tagVideo");
 
   inputCodigo.addEventListener("keyup", function(event) {
     if (event.which === 13) {
-      //video.pause();
-      //video.setAttribute("src", "arquivos/" + inputCodigo.value);
-      //video.load();
-      //video.play();
-      img.setAttribute("src", "/static/arquivos/" + inputCodigo.value);
-      
-      inputCodigo.value = '';
+      video.pause();
+      video.setAttribute("src", "/static/arquivos/" + inputCodigo.value);
+      video.load();
+      video.play();
+
+      inputCodigo.value = "";
     }
   });
 });
@@ -67,5 +52,9 @@ export default {
 <style>
 button {
   margin: 1%;
+}
+video.videoFilesCadastrados {
+  width: 500px;
+  height: 500px;
 }
 </style>

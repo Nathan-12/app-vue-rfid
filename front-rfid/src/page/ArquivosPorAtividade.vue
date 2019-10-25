@@ -5,12 +5,12 @@
         <div class="col s0"></div>
         <div class="col s12">
           <table>
-              
             <thead>
               <tr>
                 <th>#</th>
                 <th>Nome do arquivo</th>
                 <th>Código do cartão</th>
+                <th>Codigo</th>
                 <th>Mídia</th>
               </tr>
             </thead>
@@ -20,9 +20,15 @@
                 <td>{{ arquivo.id }}</td>
                 <td>{{ arquivo.nome }}</td>
                 <td>00{{ arquivo.codigo }}</td>
-                <td><img id="imagem"></td>
+                <td>
+                  <input v-model="inputCodigo" @keyup="verificarCodigo" type="text" />
+                </td>
+                <td>
+                  <video loop id="tagVideo">
+                    <source src type="mp4" />
+                  </video>
+                </td>
               </tr>
-              
             </tbody>
           </table>
         </div>
@@ -37,7 +43,10 @@ export default {
   name: "app",
   data() {
     return {
-      arquivos: []
+      arquivos: [],
+      codigo: "",
+      indice: 0,
+      inputCodigo: ""
     };
   },
 
@@ -51,9 +60,19 @@ export default {
       this.$http
         .get("http://localhost:8090/arquivo/exibir/" + this.atividadeId)
         .then(res => {
-            
           this.arquivos = res.data;
         });
+    },
+    verificarCodigo(event) {
+      if (event.which === 13) {
+        const video = document.querySelector("#tagVideo");
+        video.pause();
+        video.setAttribute("src", "/static/arquivos/" + this.inputCodigo.value);
+        video.load();
+        video.play();
+
+        this.inputCodigo = "";
+      }
     }
   }
 };
@@ -63,9 +82,8 @@ export default {
 button {
   margin: 1%;
 }
-#imagem{
-  height: 60px;
-  width: 60px;
+video {
+  height: 200px;
+  width: 200px;
 }
-
 </style>
