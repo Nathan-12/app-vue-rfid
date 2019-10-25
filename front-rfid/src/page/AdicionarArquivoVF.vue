@@ -65,7 +65,7 @@
                               class="with-gap"
                               name="group1"
                               type="radio"
-                              value="00123"
+                              value="0010649256"
                               v-model="codigoTeste"
                             />
                             <span>SIM</span>
@@ -79,7 +79,7 @@
                               class="with-gap"
                               name="group1"
                               type="radio"
-                              value="00321"
+                              value="0010512378"
                               v-model="codigoTeste"
                             />
                             <span>NÃO</span>

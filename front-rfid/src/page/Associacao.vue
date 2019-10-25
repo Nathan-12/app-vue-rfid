@@ -11,7 +11,6 @@
       <video loop id="tagVideo" width="400px" height="400px">
                   <source src />
       </video>
-      <!--<img id="tagImagem" src />-->
       </div>
       <div class="col s2"></div>
       

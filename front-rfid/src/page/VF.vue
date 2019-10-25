@@ -8,9 +8,9 @@
       <div class="row"></div>
       <div class="col s2"></div>
       <div class="col s8">
-      <!--<video loop id="tagVideo" width="400px" height="400px">
-                  <source src="/assets/arquivos/" type="mp4" />
-      </video>-->
+      <video loop id="tagVideo" width="400px" height="400px">
+                  <source src type="mp4" />
+      </video>
       <img id="tagImagem" src />
       </div>
       <div class="col s2"></div>
@@ -27,7 +27,9 @@ export default {
       arquivos: [],
       indice: 0,
       srcSet: "",
+      srcSetVideo: "",
       inputCodigo: "",
+      codigoTeste: "",
       erros: 0
     };
   },
@@ -40,23 +42,28 @@ export default {
   methods: {
     initialize() {
       this.$http
-        .get("http://localhost:8090/arquivo/exibir/" + this.atividadeId)
+        .get("http://localhost:8090/arquivo/exibirvf/" + this.atividadeId)
         .then(res => {
           const img = document.querySelector("#tagImagem");
+          const video = document.querySelector('#tagVideo');
           this.arquivos = res.data;
-          this.srcSet = "00" + res.data[this.indice].codigo;
+          console.log(this.arquivos);
+          this.srcSet = res.data[this.indice].nomeImg;
+          this.srcSetVideo = res.data[this.indice].nomeVideo;
+          this.codigoTeste = res.data[this.indice].codigoTeste;
           img.setAttribute("src", "/static/arquivos/" + this.srcSet);
-          //video.pause();
-          //video.setAttribute("src", "arquivos/" + inputCodigo.value);
-          //video.load();
-          //video.play();
+          video.pause();
+          video.setAttribute("src", "/static/arquivos/" + this.srcSetVideo);
+          video.load();
+          video.play();
         });
     },
     verificarCodigo(event) {
       if (event.which === 13) {
-        if (this.srcSet == this.inputCodigo) {
+        if (this.codigoTeste == this.inputCodigo) {
           this.indice++;
           this.initialize();
+          console.log(this.codigoTeste);
           //console.log(this.arquivos.length);
           //console.log(this.indice);
           if(this.arquivos.length == this.indice){
@@ -66,8 +73,9 @@ export default {
         else {
           alert("Código Errado");
           this.erros ++;
+          console.log(this.codigoTeste);
           //console.log(this.srcSet);
-          //console.log(this.inputCodigo);
+          console.log(this.inputCodigo);
         }
         this.inputCodigo = "";
       }

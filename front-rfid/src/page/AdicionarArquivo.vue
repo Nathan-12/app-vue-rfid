@@ -42,8 +42,8 @@
                 </tr>
               </tbody>
             </table>
-            <button type="reset" class="waves-effect green waves-light btn-small">
-              Cadastrar novo cartão
+            <button @click="salvarFile()" type="reset" class="waves-effect green waves-light btn-small">
+              Adicionar
               <i class="material-icons left">add</i>
             </button>
             <button type="reset" class="waves-effect blue waves-light btn-small"  @click="irLista()">
