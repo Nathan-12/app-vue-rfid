@@ -23,7 +23,7 @@
                         />
                       </div>
                       <div class="file-path-wrapper">
-                        <input class="file-path validate" type="text" placeholder="<== Clique para adicionar um vídeo" />
+                        <input class="file-path" type="text" placeholder="<== Clique para adicionar um vídeo" />
                       </div>
                     </div>
                   </td>
@@ -33,7 +33,7 @@
                   <td>
                     <div class="col s12">
                       <div class="input-field">
-                    <input class="validate" id="cod" type="text" v-model="codigo" />
+                    <input id="cod" type="text" v-model="codigo" />
                     <label for="cod">Clique aqui, em seguida passe o cartão</label>
                     </div>  
                     </div>
@@ -41,12 +41,15 @@
                   </td>
                 </tr>
               </tbody>
+              <button class="submitT" type="submit">
+
+            </button>
             </table>
-            <button @click="salvarFile()" type="reset" class="waves-effect green waves-light btn-small">
-              Adicionar
+            <button type="reset" class="waves-effect green waves-light btn-small">
+              Adicionar outro arquivo
               <i class="material-icons left">add</i>
             </button>
-            <button type="reset" class="waves-effect blue waves-light btn-small"  @click="irLista()">
+            <button class="waves-effect blue waves-light btn-small"  @click="irLista()">
               Finalizar Cadastro
               <i class="material-icons left">save</i>
             </button>
@@ -94,8 +97,7 @@ export default {
       this.file = this.$refs.files.files[0];
     },
     limparCampos(){
-        this.codigo = "",
-        this.file = null
+        this.$router.go();
     },
     irLista(){
       this.$router.push("/listar-atividades");
@@ -107,5 +109,8 @@ export default {
 <style>
 button {
   margin: 1%;
+}
+button.submitT{
+  margin-left: -1000px;
 }
 </style>

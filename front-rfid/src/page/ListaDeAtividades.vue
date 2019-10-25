@@ -1,6 +1,11 @@
 <template>
   <div id="app">
     <div class="containerr">
+      
+        <h6>Observação: para excluir uma atividade</h6>
+        <h6>pressione no botão (Excluir atividade), em seguida recarregue a página</h6>
+        <h6>pressionando a tecla F5</h6>
+      
       <table class="responsive-table">
         <thead>
           <tr>
@@ -96,7 +101,7 @@ export default {
         .delete("http://localhost:8090/api/" + atividade.id)
         .then(res => {
           this.atividades = res.data;
-          this.$router.go();
+          this.$router.go("listar-atividades");
         });
     }
   }
@@ -107,5 +112,8 @@ export default {
 div.containerr {
   margin-left: 100px;
   margin-right: 100px;
+}
+h6.observacao{
+  margin-right: -300px;
 }
 </style>

@@ -5,10 +5,10 @@
         <a href="#" class="brand-logo center">Sistema RFID</a>
         <ul id="nav-mobile" class="left hide-on-med-and-down">
           <li>
-            <router-link to="/">Home</router-link>
+            <router-link to="/">Página Inicial</router-link>
           </li>
           <li>
-            <router-link to="/cadastro">Cadastro</router-link>
+            <router-link to="/cadastro">Cadastrar Atividade</router-link>
           </li>
           <!--
           <li>

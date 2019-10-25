@@ -15,6 +15,7 @@
                   <th>Escolha os arquivos</th>
                   <th></th>
                   <th>Possuem relação ?</th>
+                  <th>Salvar</th>
                 </tr>
               </thead>
               <tbody>
@@ -25,6 +26,7 @@
                       <div class="btn">
                         <span>Vídeo</span>
                         <input
+                        
                           id="filesVideo"
                           ref="filesVideo"
                           type="file"
@@ -32,7 +34,7 @@
                         />
                       </div>
                       <div class="file-path-wrapper">
-                        <input class="file-path validate" type="text" placeholder="<== Clique para adicionar o vídeo"/>
+                        <input class="file-path validate" type="text" placeholder="<== Clique"/>
                       </div>
                     </div>
                     <h6>Escolha a Imagem</h6>
@@ -47,7 +49,7 @@
                         />
                       </div>
                       <div class="file-path-wrapper">
-                        <input class="file-path validate" type="text" placeholder="<== Clique para adicionar a imagem" />
+                        <input class="file-path validate" type="text" placeholder="<== Clique" />
                       </div>
                     </div>
                   </td>
@@ -58,7 +60,7 @@
                   </td>
                   <td>
                     <div class="row">
-                      <div class="col s5">
+                      <div class="col s6">
                         <p>
                           <label>
                             <input
@@ -88,14 +90,17 @@
                       </div>
                     </div>
                   </td>
+                  <th><button class="waves-effect green waves-light btn-small" type="submit">
+                    salvar
+              </button></th>
                 </tr>
               </tbody>
             </table>
-            <button class="waves-effect green waves-light btn-small">
-              Adicionar outros arquivos
+            <button type="reset" class="waves-effect green waves-light btn-small">
+              Adicionar mais arquivos
               <i class="material-icons left">add</i>
             </button>
-            <button type="reset" class="waves-effect blue waves-light btn-small">
+            <button @click="irLista()" class="waves-effect blue waves-light btn-small">
               Finalizar cadastro
               <i class="material-icons left">save</i>
             </button>
@@ -146,6 +151,12 @@ export default {
     },
     selecionarArquivosImg() {
       this.fileImg = this.$refs.filesImg.files[0];
+    },
+    limparCampos(){
+      this.$router.go();
+    },
+    irLista(){
+      this.$router.push('/listar-atividades');
     }
   }
 };
@@ -155,4 +166,5 @@ export default {
 button {
   margin: 1%;
 }
+
 </style>

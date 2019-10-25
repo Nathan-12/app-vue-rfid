@@ -1,7 +1,8 @@
 <template>
   <div id="app">
-    <div class="containerr">
-      <input autofocus id="codigoCartao" type="text" placeholder="insira o código do cartão" />
+    <div class="containerfiles">
+      <h6>Passe o cartão sobre o leitor</h6>
+      <input autofocus v-model="codigoCard" @keyup="verificarTecla" type="text" placeholder="insira o código do cartão" />
     </div>
     
     <div class="container">
@@ -13,27 +14,13 @@
 </template>
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-  const inputCodigo = document.querySelector("#codigoCartao");
-  const video = document.querySelector("#tagVideo");
-
-  inputCodigo.addEventListener("keyup", function(event) {
-    if (event.which === 13) {
-      video.pause();
-      video.setAttribute("src", "/static/arquivos/" + inputCodigo.value);
-      video.load();
-      video.play();
-
-      inputCodigo.value = "";
-    }
-  });
-});
 
 export default {
   name: "app",
   data() {
     return {
-      arquivos: []
+      arquivos: [],
+      codigoCard: ""
     };
   },
 
@@ -44,6 +31,18 @@ export default {
   methods: {
     blockSubmit(event) {
       event.preventDefault();
+    },
+    verificarTecla(event){
+      if(event.which == 13){
+        let video = document.querySelector("#tagVideo");
+
+        video.pause();
+        video.setAttribute("src", "/static/arquivos/" + this.codigoCard);
+        video.load();
+        video.play();
+
+        this.codigoCard = ""
+      }
     }
   }
 };
@@ -56,5 +55,10 @@ button {
 video.videoFilesCadastrados {
   width: 500px;
   height: 500px;
+}
+div.containerfiles{
+  margin-left: 400px;
+  margin-right: 400px;
+  margin-top: -50px;
 }
 </style>
