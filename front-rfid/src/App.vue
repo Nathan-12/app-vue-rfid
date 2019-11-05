@@ -2,7 +2,7 @@
   <div>
     <nav>
       <div class="nav-wrapper blue">
-        <a href="#" class="brand-logo center">Sistema RFID</a>
+        <a href="#" class="brand-logo center">Sistema RFID LIBRAS</a>
         <ul id="nav-mobile" class="left hide-on-med-and-down">
           <li>
             <router-link to="/">Página Inicial</router-link>

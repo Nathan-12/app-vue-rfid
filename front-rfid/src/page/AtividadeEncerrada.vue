@@ -1,10 +1,12 @@
 <template>
   <div>
     <h1>Fim da atividade !!!</h1>
+    <h1 class="h1titulo">PARABÉNS !!!</h1>
   </div>
 </template>
 
 <script>
+
 export default {
   
   data () {
@@ -30,6 +32,9 @@ li {
   margin: 0 10px;
 }
 a {
+  color: #42b983;
+}
+h1.h1titulo{
   color: #42b983;
 }
 </style>
