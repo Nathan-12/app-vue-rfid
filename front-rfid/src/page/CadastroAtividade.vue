@@ -77,6 +77,7 @@ export default {
           tipoAtividade: this.tipoAtividade,
         })
         .then(() => {
+          alert("Atividade Cadastrada com sucesso!!!");
           this.$router.push("/listar-atividades");
         })
         .catch(e => {
@@ -91,7 +92,5 @@ export default {
 button {
   margin: 1%;
 }
-#formulario{
-  
-}
+
 </style>
